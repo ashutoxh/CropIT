@@ -1,0 +1,16 @@
+meesho:
+  pdf:
+    x: 0
+    y: 550
+    height: 1000
+    width: 1000
+flipkart:
+  pdf:
+    x: 173
+    y: -1
+    height: 343
+    width: 248
+    offset: 13
+springdoc:
+  swagger-ui:
+    path: /api
