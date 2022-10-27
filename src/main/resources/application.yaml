@@ -14,3 +14,10 @@ flipkart:
 springdoc:
   swagger-ui:
     path: /api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - prometheus

@@ -1,0 +1,8 @@
+scrape_configs:
+  - job_name: 'Crop IT prometheus job'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 10s
+    static_configs:
+      - targets: ['192.168.29.117:8080', 'cropitpdf.herokuapp.com']
+        labels:
+          application: "Crop IT"
