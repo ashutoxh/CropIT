@@ -6,11 +6,11 @@ meesho:
     width: 1000
 flipkart:
   pdf:
-    x: 173
+    x: 150
     y: -1
-    height: 343
-    width: 248
-    offset: 13
+    height: 360
+    width: 300
+    offset: 0
 springdoc:
   swagger-ui:
     path: /api

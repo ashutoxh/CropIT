@@ -28,7 +28,7 @@ public class CroppingPDFForFlipkart implements CroppingService {
     @Value("${flipkart.pdf.offset}")
     private float offset;
 
-    private static String WORD_TO_FIND = "Tax Invoice";
+    private static String WORD_TO_FIND = "Not for resale";
 
     @Override
     public PDDocument cropFile(PDDocument pdf) throws IOException {
