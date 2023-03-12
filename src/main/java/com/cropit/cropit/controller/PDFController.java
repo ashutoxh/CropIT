@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/crop/pdf")
@@ -34,19 +35,19 @@ public class PDFController {
     private CroppingService flipkartService;
 
     @PostMapping(value = "/v1/meesho", produces = MediaType.APPLICATION_PDF_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void cropPDFForMeesho(@RequestParam("pdf") MultipartFile inputFile, HttpServletResponse response) throws IOException {
-        PDDocument pdf = PDDocument.load(inputFile.getInputStream());
-        FileUtils.setPDFNameFromFileName(pdf, inputFile);
-        logger.info("Meesho: PDF provided is {} with no of pages {} and size in kb {}", pdf.getDocumentInformation().getTitle(), pdf.getPages().getCount(), inputFile.getSize() / 1000);
+    public void cropPDFForMeesho(@RequestParam("pdf") List<MultipartFile> inputFileList, HttpServletResponse response) throws IOException {
+        PDDocument pdf = FileUtils.mergeFilesIntoOne(inputFileList);
+        FileUtils.setPDFNameFromFileName(pdf, inputFileList.get(0));
+        logger.info("Meesho: PDF provided is {} with no of pages {} and size in kb {}", pdf.getDocumentInformation().getTitle(), pdf.getPages().getCount(), inputFileList.stream().map(x->x.getSize()).count() / 1000);
         pdf = meeshoService.cropFile(pdf);
         sendPDFResponse(pdf, response);
     }
 
     @PostMapping(value = "/v1/flipkart", produces = MediaType.APPLICATION_PDF_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void cropPDFForFlipkart(@RequestParam("pdf") MultipartFile inputFile, HttpServletResponse response) throws IOException {
-        PDDocument pdf = PDDocument.load(inputFile.getInputStream());
-        FileUtils.setPDFNameFromFileName(pdf, inputFile);
-        logger.info("Flipkart: PDF provided is {} with no of pages {} and size in kb {}", pdf.getDocumentInformation().getTitle(), pdf.getPages().getCount(), inputFile.getSize() / 1000);
+    public void cropPDFForFlipkart(@RequestParam("pdf") List<MultipartFile> inputFileList, HttpServletResponse response) throws IOException {
+        PDDocument pdf = FileUtils.mergeFilesIntoOne(inputFileList);
+        FileUtils.setPDFNameFromFileName(pdf, inputFileList.get(0));
+        logger.info("Flipkart: PDF provided is {} with no of pages {} and size in kb {}", pdf.getDocumentInformation().getTitle(), pdf.getPages().getCount(), inputFileList.stream().map(x->x.getSize()).count() / 1000);
         pdf = flipkartService.cropFile(pdf);
         sendPDFResponse(pdf, response);
     }

@@ -1,3 +1,9 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
 meesho:
   pdf:
     x: 0
@@ -6,10 +12,10 @@ meesho:
     width: 1000
 flipkart:
   pdf:
-    x: 150
+    x: 180
     y: -1
     height: 360
-    width: 300
+    width: 235
     offset: 0
 springdoc:
   swagger-ui:

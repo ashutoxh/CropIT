@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.cropit</groupId>
 	<artifactId>crop-it</artifactId>
-	<version>1.0</version>
+	<version>2.0</version>
 	<name>CropIT</name>
 	<description>Crop files</description>
 	<properties>
